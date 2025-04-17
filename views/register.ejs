@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/register.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <form action="/api/register" method="POST">
+            <h1>Create Account</h1>
+
+            <!-- Display error message if it exists -->
+            <% if (message) { %>
+                <p style="color: red; text-align: center; margin-bottom: 15px;"><%= message %></p>
+            <% } %>
+            
+            <div class="social-icons">
+                <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your email for registration</span>
+            
+            <input type="text" placeholder="Username" name="username"  required>
+            <input type="password" placeholder="Password" name="password" required>
+    
+            <!-- Role Selection Dropdown -->
+            <div class="dropdown-container">
+                <label for="role">Select Role:</label>
+                <select name="role" id="role" required>
+                    <% roles.forEach(role => { %>
+                        <option value="<%= role %>" <%= role === selectedRole ? 'selected' : '' %>><%= role.charAt(0).toUpperCase() + role.slice(1) %></option>
+                    <% }); %>
+                </select>
+            </div>
+    
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

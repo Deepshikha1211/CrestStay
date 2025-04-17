@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- <link rel="icon" href="https://expressjs.com/images/favicon.png" type="image/x-icon">  -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/style/contact.css"> 
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo nav__logo">
+                <div>H</div>
+                <span>HOTEL<br />CrestStay</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/api/userDashboard" class="nav-item">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span> Dashboard</span>
+                </a>
+                <a href="/api/rooms2" class="nav-item">
+                    <i data-lucide="bed-double"></i>
+                    <span> Rooms</span>
+                </a>
+                <a href="/api/contact" class="nav-item active">
+                    <i data-lucide="messages-square"></i>
+                    <span> Contact</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <section class="hero">
+                <div class="container">
+                    <h2>Contact Us</h2>
+                    <p>We're here to help with any questions you may have</p>
+                </div>
+            </section>
+
+            <section class="contact-info">
+                <div class="container">
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Our Location</h3>
+                        <p>12 Marine Drive</p>
+                        <p> Mumbai, Maharashtra 400020</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Phone Number</h3>
+                        <p>Reservations: +1 (555) 123-4567</p>
+                        <p>Customer Service: +1 (555) 765-4321</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Address</h3>
+                        <p>reservations@creststay.com</p>
+                        <p>info@creststay.com</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-form-section">
+                <div class="container">
+                    <div class="form-container">
+                        <h2>Send Us a Message</h2>
+                        <form id="contactForm" action="" method="POST">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" name="subject">
+                                    <option value="reservation">Reservation Inquiry</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="complaint">Complaint</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">Send Message</button>
+                        </form>
+                      
+                    </div>
+
+                    <div class="map-container">
+                        <h2>Find Us</h2>
+                        <div class="map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215151464712!2d-73.9878584!3d40.7484405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9aeb1c6b5%3A0x35b1cfbc89a6097f!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1647359922000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-section">
+                <div class="container">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-container">
+                        <% const faqs = [
+                            { question: "What are your check-in and check-out times?", answer: "Check-in time is 3:00 PM and check-out time is 11:00 AM. Early check-in and late check-out may be available upon request, subject to availability." },
+                            { question: "Do you offer airport transportation?", answer: "Yes, we offer airport shuttle service for our guests. Please contact our concierge at least 24 hours in advance to arrange transportation." },
+                            { question: "Is breakfast included with the room?", answer: "Breakfast is included with select room packages. Please check your reservation details or contact our front desk to confirm if breakfast is included with your stay." },
+                            { question: "Do you have parking facilities?", answer: "Yes, we offer both self-parking and valet parking options. Self-parking is $25 per day, and valet parking is $35 per day with unlimited in and out privileges." }
+                        ]; %>
+
+                        <% faqs.forEach(faq => { %>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3><%= faq.question %></h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p><%= faq.answer %></p>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <h3>CrestStay</h3>
+                            <p>Experience luxury like never before at our premium hotel destination.</p>
+                            <div class="social-icons">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-section">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Rooms & Suites</a></li>
+                                <li><a href="#">Dining</a></li>
+                                <li><a href="#">Spa & Wellness</a></li>
+                                <li><a href="#">Events</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h3>Contact</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 12 Marine Drive, Mumbai, Maharashtra 400020</p>
+<p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+<p><i class="fas fa-envelope"></i> info@creststay.in</p>
+
+                        </div>
+                        <div class="footer-section">
+                            <h3>Newsletter</h3>
+                            <p>Subscribe to our newsletter for special offers and updates.</p>
+                            <form class="newsletter-form" action="/api/subscribe" method="POST">
+                                <input type="email" name="email" placeholder="Your Email Address" required>
+                                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; <%= new Date().getFullYear() %> CrestStay. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/script/contact.js"></script>
+</body>
+</html>

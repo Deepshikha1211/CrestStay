@@ -1,0 +1,802 @@
+:root {
+  --primary: #0EA5E9;
+  --primary-light: #E0F2FE;
+  --sidebar-bg: #0f1a2c;
+  --sidebar-hover: #1F2937;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --bg-secondary: #F3F4F6;
+  --border-color: #E5E7EB;
+  --success-bg: #DEF7EC;
+  --success-text: #03543F;
+  --warning-bg: #FEF3C7;
+  --warning-text: #92400E;
+  --danger-bg: #FEE2E2;
+  --danger-text: #B91C1C;
+}
+
+.dark-mode {
+  --primary: #60A5FA;
+  --primary-light: #1E3A8A;
+  --sidebar-bg: #1F2937;
+  --sidebar-hover: #374151;
+  --text-primary: #F9FAFB;
+  --text-secondary: #D1D5DB;
+  --bg-secondary: #111827;
+  --border-color: #374151;
+  --success-bg: #064E3B;
+  --success-text: #34D399;
+  --warning-bg: #78350F;
+  --warning-text: #FBBF24;
+  --danger-bg: #7F1D1D;
+  --danger-text: #F87171;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: var(--sidebar-bg);
+  padding: 1.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: width 0.3s ease, background 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 2px;
+}
+.logo div {
+  padding-inline: 12px;
+  font-size: 2rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  color: #9CA3AF;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.nav-item:hover, .nav-item.active {
+  background: var(--sidebar-hover);
+  color: white;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+  width: 300px;
+  border: 1px solid var(--border-color);
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notification-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #EF4444;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.metric-card {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.metric-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.more-options-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.metric-value {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.metric-change {
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.metric-change.positive {
+  color: #10B981;
+}
+
+.metric-change.negative {
+  color: #EF4444;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.chart-container {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.3s ease;
+  max-height: max-content;
+}
+
+.chart-container:hover, .room-occupancy:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chart-wrapper {
+  height: 300px;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.select-period {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.select-period:hover {
+  border-color: var(--primary);
+}
+
+.occupancy-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.total-rooms {
+  text-align: center;
+}
+
+.room-count {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.room-label {
+  color: var(--text-secondary);
+}
+
+.occupancy-progress {
+  margin: 1rem 0;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+}
+
+.progress-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-segment.occupied {
+  background-color: var(--primary);
+}
+
+.progress-segment.reserved {
+  background-color: #FCD34D;
+}
+
+.progress-segment.available {
+  background-color: #9CA3AF;
+}
+
+.occupancy-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-dot.occupied {
+  background-color: var(--primary);
+}
+
+.legend-dot.reserved {
+  background-color: #FCD34D;
+}
+
+.legend-dot.available {
+  background-color: #9CA3AF;
+}
+
+.bookings-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.booking-list {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.3s ease;
+  margin-top: -250px;
+}
+
+.ratings-section {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.3s ease;
+}
+
+.booking-list:hover, .ratings-section:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.list-header, .rating-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.see-all-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.see-all-btn:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+.booking-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.booking-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.room-occupancy {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  margin: 1rem 0;
+}
+
+.progress-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.booking-platform-chart {
+  height: 200px;
+  margin: 1rem 0;
+}
+
+.platform-legend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.platform-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.platform-color {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.platform-value {
+  color: var(--text-secondary);
+  margin-left: auto;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: var(--bg-secondary);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--bg-secondary);
+}
+
+.status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status.confirmed {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+.status.pending {
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.status.cancelled {
+  background-color: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.action-btn:hover {
+  color: var(--primary);
+}
+
+.overall-score {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.rating-label {
+  color: var(--text-secondary);
+}
+
+.rating-bars {
+  margin-top: 1.5rem;
+}
+
+.rating-item {
+  margin-bottom: 1rem;
+}
+
+.rating-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.rating-progress {
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rating-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.recent-activity {
+  margin-top: 1.5rem;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.activity-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-time {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.lucide {
+  width: 1.25em;
+  height: 1.25em;
+  stroke-width: 2;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sidebar .lucide {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.5rem;
+}
+
+.sidebar.collapsed .lucide {
+  margin-right: 0;
+}
+
+.action-btn .lucide {
+  width: 1em;
+  height: 1em;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--danger-bg);
+  color: var(--danger-text);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: var(--danger-text);
+  color: white;
+}
+
+.toggle-mode {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+@media (max-width: 1024px) {
+  .charts-grid,
+  .bookings-section {
+      grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      padding: 1rem;
+      z-index: 10;
+      flex-direction: row;
+      justify-content: space-around;
+  }
+
+  .sidebar.collapsed {
+      transform: translateY(100%);
+  }
+
+  .main-content {
+      margin-bottom: 60px;
+  }
+
+  .nav-item {
+      padding: 0.5rem;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .nav-item span {
+      font-size: 0.75rem;
+  }
+
+  .header {
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  .search-bar {
+      width: 100%;
+  }
+
+  .user-section {
+      width: 100%;
+      justify-content: space-between;
+  }
+
+  .metrics {
+      grid-template-columns: 1fr;
+  }
+
+  .chart-wrapper {
+      height: 250px;
+  }
+
+  .booking-filters {
+      flex-wrap: wrap;
+  }
+
+  .booking-stats {
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  .stat-item {
+      text-align: left;
+  }
+
+  .logout-btn span {
+      display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .chart-legend {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .occupancy-legend {
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
+
+  .table-container {
+      overflow-x: scroll;
+  }
+
+  th, td {
+      white-space: nowrap;
+  }
+}

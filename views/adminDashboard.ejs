@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+   
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../style/style.css">
+   
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo nav__logo">
+                <div>H</div>
+                <span>HOTEL<br />CrestStay</span>
+            </div>
+            <nav>
+                <a href="/api/adminDashboard" class="nav-item active">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/api/reservation" class="nav-item">
+                    <i data-lucide="calendar"></i>
+                    <span>Reservation</span>
+                </a>
+                <a href="/api/rooms" class="nav-item">
+                    <i data-lucide="bed-double"></i>
+                    <span>Rooms</span>
+                </a>
+                <a href="/api/staff" class="nav-item">
+                    <i data-lucide="users"></i>
+                    <span>Staff</span>
+                </a>
+                <!-- <a href="#" class="nav-item">
+                    <i data-lucide="bar-chart-2"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="file-text"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="message-square"></i>
+                    <span>Reviews</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="credit-card"></i>
+                    <span>Invoices</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </a> -->
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="search-bar">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search booking, room, etc" id="searchInput">
+                </div>
+                <div class="user-section">
+                    <button class="notification-btn">
+                        <i data-lucide="bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="/profile.jpg" alt="User" class="user-avatar" />
+
+                        <span class="user-name"></span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                    <button id="toggleMode" class="toggle-mode">
+                        <i data-lucide="moon"></i>
+                    </button>
+                    <button id="logoutBtn" class="logout-btn">
+                        <i data-lucide="log-out"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Total Revenue</span>
+                            <button class="more-options-btn">
+                                <i data-lucide="more-horizontal"></i>
+                            </button>
+                        </div>
+                        <div class="metric-value">$32,800</div>
+                        <div class="metric-change positive">
+                            <i data-lucide="trending-up"></i>
+                            3.45% from last week
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>New Bookings</span>
+                            <button class="more-options-btn">
+                                <i data-lucide="more-horizontal"></i>
+                            </button>
+                        </div>
+                        <div class="metric-value">135</div>
+                        <div class="metric-change positive">
+                            <i data-lucide="trending-up"></i>
+                            2.59% from last week
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Check-In</span>
+                            <button class="more-options-btn">
+                                <i data-lucide="more-horizontal"></i>
+                            </button>
+                        </div>
+                        <div class="metric-value">101</div>
+                        <div class="metric-change negative">
+                            <i data-lucide="trending-down"></i>
+                            1.56% from last week
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Check-Out</span>
+                            <button class="more-options-btn">
+                                <i data-lucide="more-horizontal"></i>
+                            </button>
+                        </div>
+                        <div class="metric-value">29</div>
+                        <div class="metric-change positive">
+                            <i data-lucide="trending-up"></i>
+                            0.63% from last week
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Guests</h3>
+                                <p class="text-sm text-gray-500">Daily guest count overview</p>
+                            </div>
+                            <select class="select-period" id="guestChartPeriod">
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="guestsChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background-color: var(--primary)"></div>
+                                <span>Current Period</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background-color: #E5E7EB"></div>
+                                <span>Previous Period</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="room-occupancy">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Room Occupancy</h3>
+                                <p class="text-sm text-gray-500">Live occupancy status</p>
+                            </div>
+                            <button class="more-options-btn">
+                                <i data-lucide="more-horizontal"></i>
+                            </button>
+                        </div>
+                        <div class="occupancy-stats">
+                            <div class="total-rooms">
+                                <span class="room-count">256</span>
+                                <span class="room-label">Total Rooms</span>
+                            </div>
+                            <div class="occupancy-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-segment occupied" style="width: 38%"></div>
+                                    <div class="progress-segment reserved" style="width: 18%"></div>
+                                    <div class="progress-segment available" style="width: 44%"></div>
+                                </div>
+                            </div>
+                            <div class="occupancy-legend">
+                                <div class="legend-item">
+                                    <div class="legend-dot occupied"></div>
+                                    <span>98 Occupied (38%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-dot reserved"></div>
+                                    <span>45 Reserved (18%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-dot available"></div>
+                                    <span>113 Available (44%)</span>
+                                </div>
+                            </div>
+                            <h3>Booking Platform</h3>
+                            <div class="booking-platform-chart">
+                                <canvas id="platformChart"></canvas>
+                            </div>
+                            <div class="platform-legend">
+                                <div class="platform-item">
+                                    <span class="platform-color" style="background-color: #0EA5E9;"></span>
+                                    <span>Booking.com</span>
+                                    <span class="platform-value">29%</span>
+                                </div>
+                                <div class="platform-item">
+                                    <span class="platform-color" style="background-color: #6366F1;"></span>
+                                    <span>Agoda</span>
+                                    <span class="platform-value">25%</span>
+                                </div>
+                                <div class="platform-item">
+                                    <span class="platform-color" style="background-color: #F59E0B;"></span>
+                                    <span>Airbnb</span>
+                                    <span class="platform-value">15%</span>
+                                </div>
+                                <div class="platform-item">
+                                    <span class="platform-color" style="background-color: #10B981;"></span>
+                                    <span>Hotels.com</span>
+                                    <span class="platform-value">12%</span>
+                                </div>
+                                <div class="platform-item">
+                                    <span class="platform-color" style="background-color: #EF4444;"></span>
+                                    <span>TripAdvisor</span>
+                                    <span class="platform-value">9%</span>
+                                </div>
+                                <div class="platform-item">
+                                    <span class="platform-color" style="background-color: #8B5CF6;"></span>
+                                    <span>Traveloka</span>
+                                    <span class="platform-value">7%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bookings-section">
+                    <div class="booking-list">
+                        <div class="list-header">
+                            <div>
+                                <h3>Booking List</h3>
+                                <br>
+                                <p class="text-sm text-gray-500">Recent booking activity</p>
+                            </div>
+                            <button class="see-all-btn" id="seeAllBookings">See All</button>
+                        </div>
+                        <div class="booking-filters">
+                            <button class="filter-btn active" data-filter="all">All Bookings</button>
+                            <button class="filter-btn" data-filter="confirmed">Confirmed</button>
+                            <button class="filter-btn" data-filter="pending">Pending</button>
+                            <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+                        </div>
+                        <br>
+                        <div class="booking-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">1,234</div>
+                                <div class="stat-label">Total Bookings</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">89%</div>
+                                <div class="stat-label">Confirmation Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">$143</div>
+                                <div class="stat-label">Avg. Daily Rate</div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Guest Name</th>
+                                        <th>Room Type</th>
+                                        <th>Duration</th>
+                                        <th>Check-In</th>
+                                        <th>Check-Out</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookingTableBody">
+                                    <!-- Table content will be dynamically populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="ratings-section">
+                        <div class="rating-header">
+                            <div>
+                                <h3>Overall Ratings</h3>
+                                <div class="overall-score">8.9</div>
+                                <div class="rating-label">Excellent</div>
+                            </div>
+                            <button class="see-all-btn">See All</button>
+                        </div>
+                        <div class="rating-bars">
+                            <div class="rating-item">
+                                <div class="rating-label">
+                                    <span>Cleanliness</span>
+                                    <span>8.8</span>
+                                </div>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-label">
+                                    <span>Facilities</span>
+                                    <span>9.1</span>
+                                </div>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 91%"></div>
+                                </div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-label">
+                                    <span>Location</span>
+                                    <span>9.0</span>
+                                </div>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-label">
+                                    <span>Service</span>
+                                    <span>8.7</span>
+                                </div>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-label">
+                                    <span>Value</span>
+                                    <span>8.9</span>
+                                </div>
+                                <div class="rating-progress">
+                                    <div class="rating-fill" style="width: 89%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../script/main.js">
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+   
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../style/rooms.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="logo nav__logo">
+            <div>H</div>
+            <span>HOTEL<br />CrestStay</span>
+        </div>
+        <nav>
+            <a href="/api/adminDashboard" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/api/reservation" class="nav-item">
+                <i data-lucide="calendar"></i>
+                <span>Reservation</span>
+            </a>
+            <a href="/api/rooms" class="nav-item active">
+                <i data-lucide="bed-double"></i>
+                <span>Rooms</span>
+            </a>
+            <a href="/api/staff" class="nav-item">
+                <i data-lucide="users"></i>
+                <span>Staff</span>
+            </a>
+           
+        </nav>
+    </aside>
+
+    <div class="main-content">
+        <div class="container">
+            <header>
+                <h1>Luxury Accommodations</h1>
+                <p class="subtitle">Experience comfort and elegance in our carefully designed spaces</p>
+            </header>
+
+            <!-- Filter Section -->
+            <div id="filterSection">
+                <select id="amenitiesFilter">
+                    <option value="">Filter by Amenities</option>
+                    <option value="Pool">Private Pool</option>
+                    <option value="WiFi">Free WiFi</option>
+                    <option value="Breakfast">Complimentary Breakfast</option>
+                    <option value="View">Room with a View</option>
+                    <option value="Jacuzzi">Jacuzzi</option>
+                </select>
+
+                <select id="ratingFilter">
+                    <option value="">Filter by Rating</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                </select>
+
+                <div>
+                    <label for="priceRange">Price Range: </label>
+                    <input type="range" id="priceRange" min="100" max="350" value="350">
+                    <span id="priceRangeDisplay">$350</span>
+                </div>
+
+                <button id="wishlistToggle" class="btn">View Wishlist (<span id="wishlistCount">0</span>)</button>
+            </div>
+            
+            <div class="rooms-container">
+                <div class="room-card">
+                    <img src="https://www.sovereign.com/-/media/bynder/sovereign-properties/greece/zakynthos/lesante-blu-exclusive-beach-resort/rooms/lesante-blu-2022-deluxe-suite-private-pool-sea-view-001-121025-hybris.jpg?rev=cc4c1fa211594d2f8cefef3ea3bdd2d8&w=950.25&h=700.875&rel=0
+    
+                    " alt="Presidential Suite">
+                    <div class="room-info">
+                        <h2>Presidential Suite</h2>
+                        <div class="price">$250 per night</div>
+                        <p>Private Pool | Free Breakfast | Mini Bar</p>
+                        <div class="rating">★★★★★</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Presidential Suite" data-beds="1 King Size Bed" data-facilities="Private Pool, Mini Bar, Free Breakfast, Smart TV, Lounge Area" data-rating="5 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Presidential Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ3j1Zua-X9NSrKSjMtFRDavgHo9QEkRyCFQ&s
+    
+                    " alt="Executive Suite">
+                    <div class="room-info">
+                        <h2>Executive Suite</h2>
+                        <div class="price">$180 per night</div>
+                        <p>Ocean View | King Bed | High-Speed WiFi</p>
+                        <div class="rating">★★★★☆</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Executive Suite" data-beds="1 King Size Bed" data-facilities="Ocean View, Free WiFi, Work Desk, Coffee Machine" data-rating="4 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Executive Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://www.sandycove-hotel.co.uk/sites/default/files/styles/1040x585/public/2023-09/sch-accom_room-47-1.jpg?h=c6980913&itok=VllwRR00
+    
+                    " alt="Mini Suite">
+                    <div class="room-info">
+                        <h2>Mini Suite</h2>
+                        <div class="price">$150 per night</div>
+                        <p>Private Balcony | Two Double Beds | Smart TV</p>
+                        <div class="rating">★★★★☆</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Mini Suite" data-beds="2 Double Beds" data-facilities="Balcony, Smart TV, Free WiFi, Mini Fridge" data-rating="4 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Mini Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://innofthelostcoast.com/wp-content/uploads/2023/10/Deluxe-Spa-Suite-gallery01.jpg
+                    " alt="Deluxe Room">
+                    <div class="room-info">
+                        <h2>Deluxe Room</h2>
+                        <div class="price">$200 per night</div>
+                        <p>Hot Tub | Private Balcony | Complimentary Parking</p>
+                        <div class="rating">★★★★★</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Deluxe Room" data-beds="1 King Size Bed" data-facilities="Hot Tub, Private Balcony, Free Parking, Mini Bar" data-rating="5 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Deluxe Room">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://img.freepik.com/premium-photo/modern-stylish-hotel-room-with-balcony-amazing-views-mountains-offering-insidethebed-tea-service-balcony-view-mountain-hotel-architecture-concept_1257429-40274.jpg
+                    " alt="Superior King Room">
+                    <div class="room-info">
+                        <h2>Superior King Room</h2>
+                        <div class="price">$170 per night</div>
+                        <p>Mountain View | Breakfast Included | Smart Entertainment</p>
+                        <div class="rating">★★★★☆</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Superior King Room" data-beds="1 King Size Bed" data-facilities="Mountain View, Free Breakfast, Smart TV, Work Desk" data-rating="4 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Superior King Room">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="/room-2.jpg" alt="Family Suite">
+                    <div class="room-info">
+                        <h2>Family Suite</h2>
+                        <div class="price">$220 per night</div>
+                        <p>Two Bedrooms | Living Area | Fully Equipped Kitchenette</p>
+                        <div class="rating">★★★★★</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Family Suite" data-beds="1 King Size Bed, 2 Single Beds" data-facilities="Two Bedrooms, Living Room, Kitchenette, Dining Area" data-rating="5 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Family Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://awakenhotel.com/wp-content/uploads/2024/06/PRIN4734-Edit-scaled.jpg
+                    " alt="Triple Room">
+                    <div class="room-info">
+                        <h2>Triple Room</h2>
+                        <div class="price">$190 per night</div>
+                        <p>Sea View | Complimentary Breakfast | Refreshment Center</p>
+                        <div class="rating">★★★★★</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Triple Room" data-beds="3 Single Beds" data-facilities="Sea View, Free Breakfast, Mini Bar, Smart TV" data-rating="5 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Triple Room">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://wedgewoodhotel.com/wp-content/uploads/2022/11/Image-7-1680x0-c-default.png
+    
+                    " alt="Penthouse Suite">
+                    <div class="room-info">
+                        <h2>Penthouse Suite</h2>
+                        <div class="price">$350 per night</div>
+                        <p>Private Terrace | Jacuzzi | Dedicated Butler Service</p>
+                        <div class="rating">★★★★★</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Penthouse Suite" data-beds="1 King Size Bed" data-facilities="Private Terrace, Jacuzzi, Butler Service, Panoramic Views" data-rating="5 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Penthouse Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFIIcPAGNKtnbvaAe6_8AKigUimJtQCdp90w&s
+                    " alt="Junior Suite">
+                    <div class="room-info">
+                        <h2>Junior Suite</h2>
+                        <div class="price">$160 per night</div>
+                        <p>City View | Twin Beds | Premium Entertainment</p>
+                        <div class="rating">★★★★☆</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Junior Suite" data-beds="2 Double Beds" data-facilities="City View, Smart TV, Work Desk, Mini Bar" data-rating="4 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Junior Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://media.istockphoto.com/id/1216598702/photo/3d-rendering-modern-luxury-bedroom-suite-and-bathroom.jpg?s=612x612&w=0&k=20&c=okVEo3QqRP6x8Cc-Oqd4p0pH_zvqLxA0NcvfcrddSio=
+                    " alt="Luxury Suite">
+                    <div class="room-info">
+                        <h2>Luxury Suite</h2>
+                        <div class="price">$280 per night</div>
+                        <p>Hot Tub | Panoramic View |Complimentary Private Bar</p>
+                        <div class="rating">★★★★★</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Luxury Suite" data-beds="1 King Size Bed" data-facilities="Hot Tub, Panoramic View, Private Bar, Lounge Area" data-rating="5 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Luxury Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/b0/b8/60/suite-hotels.jpg?w=1200&h=-1&s=1
+    
+                    " alt="Standard Room">
+                    <div class="room-info">
+                        <h2>Standard Room</h2>
+                        <div class="price">$120 per night</div>
+                        <p>Premium Toiletries | Breakfast Included | Smart TV</p>
+                        <div class="rating">★★★★☆</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Standard Room" data-beds="1 Queen Size Bed" data-facilities="Premium Toiletries, Free Breakfast, Smart TV, Work Desk" data-rating="4 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Standard Room">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="room-card">
+                    <img src="https://www.bestwesterncountry.com/wp-content/uploads/2017/06/63380660_XXL-1.jpg" alt="Jacuzzi Suite">
+                    <div class="room-info">
+                        <h2>Jacuzzi Suite</h2>
+                        <div class="price">$240 per night</div>
+                        <p>Two Bedrooms | Living Room | Complimentary WiFi</p>
+                        <div class="rating">★★★★★</div>
+                        <div class="buttons">
+                            <button class="btn view-details" data-room="Jacuzzi Suite" data-beds="1 King Size Bed, 2 Single Beds" data-facilities="Two Bedrooms, Living Room, Free WiFi, Private Jacuzzi" data-rating="5 Stars">View Details</button>
+                            <button class="btn book-now" data-room="Jacuzzi Suite">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal-overlay"></div>
+    
+    <div class="modal" id="roomDetailsModal">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <h2 id="modalTitle"></h2>
+        <p><strong>Accommodation:</strong> <span id="modalBeds"></span></p>
+        <p><strong>Amenities:</strong> <span id="modalFacilities"></span></p>
+        <p><strong>Rating:</strong> <span id="modalRating"></span></p>
+    </div>
+
+    <div class="modal" id="bookingModal">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <h2>Reserve Your Stay</h2>
+        <p><strong>Room Type:</strong> <span id="bookingRoom"></span></p>
+        
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" placeholder="Enter your full name">
+        
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email address">
+        
+        <label for="checkin">Check-in Date:</label>
+        <input type="date" id="checkin">
+        
+        <label for="checkout">Check-out Date:</label>
+        <input type="date" id="checkout">
+        
+        <button class="btn" style="width: 100%; margin-top: 10px;">Confirm Reservation</button>
+    </div>
+    <div class="modal" id="wishlistModal">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <h2>Your Wishlist</h2>
+        <div id="wishlistItems"></div>
+    </div>
+
+   
+
+    <script src="../script/rooms.js"></script>
+        
+    </script>
+</body>
+</html>

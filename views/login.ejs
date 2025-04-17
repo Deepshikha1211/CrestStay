@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="../style/login.css">
+</head>
+
+<body>
+
+    <div class="container" id="container">
+
+        <form method="POST" action="/api/login">
+            <h1>Sign In</h1>
+
+            <!-- Display Message (Error / Success) -->
+            <% if (message) { %>
+                <p style="color: red; text-align: center; margin-bottom: 15px;"><%= message %></p>
+            <% } %>
+
+            <div class="social-icons">
+                <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+
+            <span>or use your username and password</span>
+
+            <!-- Pre-fill username if available -->
+            <input type="text" placeholder="Username" name="username" value="<%= typeof username !== 'undefined' ? username : '' %>" required>
+
+            <input type="password" placeholder="Password" name="password" required>
+
+            <!-- Role Selection Dropdown -->
+            <div class="dropdown-container">
+                <label for="role">Select Role:</label>
+                <select name="role" id="role" required>
+                    <option value="user" <%= role === 'user' ? 'selected' : '' %>>User</option>
+                    <option value="admin" <%= role === 'admin' ? 'selected' : '' %>>Admin</option>
+                </select>
+            </div>
+
+            <a href="#">Forgot Your Password?</a>
+            <button type="submit">Sign In</button>
+
+            <!-- Create Account Option -->
+            <p>Don't have an account? <a href="/api/register">Create Account</a></p>
+        </form>
+    </div>
+
+</body>
+
+</html>

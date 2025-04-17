@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | Guest Dashboard</title>
+    
+
+    <link rel="stylesheet" href="../style/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div>H</div>
+                <span>HOTEL<br />CrestStay</span>
+            </div>
+            <div class="sidebar-content">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li>
+                            <br>
+                            <a href="/api/userDashboard" class="active">
+                                <i data-lucide="layout-dashboard"></i>
+                                <span class="nav-text">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/api/rooms2">
+                                <i data-lucide="bed-double"></i>
+                                <span class="nav-text">Rooms</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/api/contact">
+                                <i data-lucide="messages-square"></i>
+                                <span class="nav-text">Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                   
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <img src="/profile.jpg" alt="User Profile">
+                        <span class="user-name">User</span>
+                    </div>
+                    <div class="language-selector">
+                        <select id="language">
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
+                    <button id="logoutBtn" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                    
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="dashboard-container">
+                    <!-- Welcome Banner -->
+                    <section class="welcome-banner">
+                        <div class="welcome-content">
+                            <h2>Welcome!</h2>
+                            <p>Your stay with us begins in <span class="countdown">3 days</span></p>
+                            <button class="btn-primary">Manage Reservation</button>
+                        </div>
+                        <div class="welcome-image">
+                            <img src="/welcome.avif" alt="Hotel View">
+                        </div>
+                    </section>
+
+                    <!-- Reservation Summary -->
+                    <section class="reservation-summary">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Your Reservation</h3>
+                                <span class="reservation-status">Confirmed</span>
+                            </div>
+                            <div class="reservation-details">
+                                <div class="detail-item">
+                                    <span class="material-symbols-outlined">calendar_month</span>
+                                    <div>
+                                        <h4>Dates</h4>
+                                        <p>Check-in: March 15, 2025 (3:00 PM)</p>
+                                        <p>Check-out: March 20, 2025 (11:00 AM)</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="material-symbols-outlined">hotel</span>
+                                    <div>
+                                        <h4>Room</h4>
+                                        <p>Deluxe Ocean View Suite</p>
+                                        <p>2 Adults, 1 Child</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="material-symbols-outlined">payments</span>
+                                    <div>
+                                        <h4>Payment</h4>
+                                        <p>Total: $1,250.00</p>
+                                        <p>Deposit Paid: $375.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-outline">Modify</button>
+                                <button class="btn-outline">Cancel</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Quick Actions -->
+                    <section class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="actions-grid">
+                            <div class="action-card">
+                                <span class="material-symbols-outlined">room_service</span>
+                                <h4>Room Service</h4>
+                                <p>Order food & drinks to your room</p>
+                            </div>
+                            <div class="action-card">
+                                <span class="material-symbols-outlined">spa</span>
+                                <h4>Book Spa</h4>
+                                <p>Schedule a relaxing treatment</p>
+                            </div>
+                            <div class="action-card">
+                                <span class="material-symbols-outlined">directions_car</span>
+                                <h4>Airport Transfer</h4>
+                                <p>Book your transportation</p>
+                            </div>
+                            <div class="action-card">
+                                <span class="material-symbols-outlined">restaurant</span>
+                                <h4>Restaurant</h4>
+                                <p>Reserve a table for dining</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Dashboard Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Room Details -->
+                        <section class="room-details">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Your Room</h3>
+                                    <button class="btn-text">View Gallery</button>
+                                </div>
+                                <div class="room-image">
+                                    <img src="/room1.avif" alt="Deluxe Ocean View Suite">
+                                </div>
+                                <div class="room-features">
+                                    <div class="feature">
+                                        <span class="material-symbols-outlined">wifi</span>
+                                        <p>Free Wi-Fi</p>
+                                    </div>
+                                    <div class="feature">
+                                        <span class="material-symbols-outlined">ac_unit</span>
+                                        <p>Air Conditioning</p>
+                                    </div>
+                                    <div class="feature">
+                                        <span class="material-symbols-outlined">tv</span>
+                                        <p>Smart TV</p>
+                                    </div>
+                                    <div class="feature">
+                                        <span class="material-symbols-outlined">balcony</span>
+                                        <p>Balcony</p>
+                                    </div>
+                                    <div class="feature">
+                                        <span class="material-symbols-outlined">bathtub</span>
+                                        <p>Jacuzzi</p>
+                                    </div>
+                                    <div class="feature">
+                                        <span class="material-symbols-outlined">kitchen</span>
+                                        <p>Mini Bar</p>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="btn-primary">Virtual Tour</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Weather & Local Info -->
+                        <section class="weather-local">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Local Weather</h3>
+                                </div>
+                                <div class="weather-display">
+                                    <div class="current-weather">
+                                        <div class="weather-icon">
+                                            <span class="material-symbols-outlined">wb_sunny</span>
+                                        </div>
+                                        <div class="weather-info">
+                                            <h4>Sunny</h4>
+                                            <p class="temperature">28°C / 82°F</p>
+                                            <p>Malibu, California</p>
+                                        </div>
+                                    </div>
+                                    <div class="forecast">
+                                        <div class="forecast-day">
+                                            <p>Mon</p>
+                                            <span class="material-symbols-outlined">wb_sunny</span>
+                                            <p>29°C</p>
+                                        </div>
+                                        <div class="forecast-day">
+                                            <p>Tue</p>
+                                            <span class="material-symbols-outlined">wb_sunny</span>
+                                            <p>28°C</p>
+                                        </div>
+                                        <div class="forecast-day">
+                                            <p>Wed</p>
+                                            <span class="material-symbols-outlined">partly_cloudy_day</span>
+                                            <p>26°C</p>
+                                        </div>
+                                        <div class="forecast-day">
+                                            <p>Thu</p>
+                                            <span class="material-symbols-outlined">wb_sunny</span>
+                                            <p>27°C</p>
+                                        </div>
+                                        <div class="forecast-day">
+                                            <p>Fri</p>
+                                            <span class="material-symbols-outlined">wb_sunny</span>
+                                            <p>28°C</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Upcoming Activities -->
+                        <section class="activities">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Recommended Activities</h3>
+                                    <button class="btn-text">View All</button>
+                                </div>
+                                <div class="activities-list">
+                                    <div class="activity-item">
+                                        <img src="/room2.avif" alt="Sunset Yoga">
+                                        <div class="activity-details">
+                                            <h4>Sunset Yoga</h4>
+                                            <p>Daily at 6:00 PM • Beach Deck</p>
+                                            <p class="activity-price">$15 per person</p>
+                                        </div>
+                                        <button class="btn-outline">Book</button>
+                                    </div>
+                                    <div class="activity-item">
+                                        <img src="/room3.avif" alt="Wine Tasting">
+                                        <div class="activity-details">
+                                            <h4>Wine Tasting</h4>
+                                            <p>Fridays at 7:30 PM • Cellar Lounge</p>
+                                            <p class="activity-price">$35 per person</p>
+                                        </div>
+                                        <button class="btn-outline">Book</button>
+                                    </div>
+                                    <div class="activity-item">
+                                        <img src="/room4.avif" alt="Snorkeling Tour">
+                                        <div class="activity-details">
+                                            <h4>Snorkeling Tour</h4>
+                                            <p>Daily at 10:00 AM • Marina</p>
+                                            <p class="activity-price">$45 per person</p>
+                                        </div>
+                                        <button class="btn-outline">Book</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Special Offers -->
+                        <section class="special-offers">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Special Offers</h3>
+                                </div>
+                                <div class="offers-list">
+                                    <div class="offer-item">
+                                        <div class="offer-badge">20% OFF</div>
+                                        <h4>Spa Package</h4>
+                                        <p>Book any 90-minute treatment and receive 20% off</p>
+                                        <button class="btn-primary">View Details</button>
+                                    </div>
+                                    <div class="offer-item">
+                                        <div class="offer-badge">SPECIAL</div>
+                                        <h4>Romantic Dinner</h4>
+                                        <p>Private beachfront dinner with complimentary champagne</p>
+                                        <button class="btn-primary">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Dining Options -->
+                    <section class="dining-options">
+                        <h3>Dining Options</h3>
+                        <div class="dining-carousel">
+                            <div class="dining-card">
+                                <img src="/room5.avif" alt="Ocean View Restaurant">
+                                <div class="dining-content">
+                                    <h4>Ocean View Restaurant</h4>
+                                    <p class="dining-cuisine">International Cuisine</p>
+                                    <p class="dining-hours">7:00 AM - 10:30 PM</p>
+                                    <div class="dining-actions">
+                                        <button class="btn-outline">Menu</button>
+                                        <button class="btn-primary">Reserve</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dining-card">
+                                <img src="/room6.avif" alt="Sunset Lounge">
+                                <div class="dining-content">
+                                    <h4>Sunset Lounge</h4>
+                                    <p class="dining-cuisine">Cocktails & Tapas</p>
+                                    <p class="dining-hours">4:00 PM - 12:00 AM</p>
+                                    <div class="dining-actions">
+                                        <button class="btn-outline">Menu</button>
+                                        <button class="btn-primary">Reserve</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dining-card">
+                                <img src="/room7.avif" alt="Bamboo Asian">
+                                <div class="dining-content">
+                                    <h4>Bamboo Asian</h4>
+                                    <p class="dining-cuisine">Japanese & Thai</p>
+                                    <p class="dining-hours">6:00 PM - 10:30 PM</p>
+                                    <div class="dining-actions">
+                                        <button class="btn-outline">Menu</button>
+                                        <button class="btn-primary">Reserve</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dining-card">
+                                <img src="/room8.avif" alt="Beach Grill">
+                                <div class="dining-content">
+                                    <h4>Beach Grill</h4>
+                                    <p class="dining-cuisine">Seafood & Steaks</p>
+                                    <p class="dining-hours">12:00 PM - 9:00 PM</p>
+                                    <div class="dining-actions">
+                                        <button class="btn-outline">Menu</button>
+                                        <button class="btn-primary">Reserve</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-control prev">
+                                <span class="material-symbols-outlined">chevron_left</span>
+                            </button>
+                            <div class="carousel-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <button class="carousel-control next">
+                                <span class="material-symbols-outlined">chevron_right</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Concierge Chat -->
+                    <!-- <div class="concierge-chat">
+                        <button class="chat-button">
+                            <span class="material-symbols-outlined">support_agent</span>
+                            <span>Chat with Concierge</span>
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- Footer -->
+                <footer class="main-footer">
+                    <div class="footer-container">
+                        <div class="footer-section">
+                            <p><i class="fas fa-map-marker-alt"></i> 12 Marine Drive, Mumbai, Maharashtra 400020</p>
+<p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+<p><i class="fas fa-envelope"></i> info@creststay.in</p>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Rooms & Suites</a></li>
+                                <li><a href="#">Dining</a></li>
+                                <li><a href="#">Spa & Wellness</a></li>
+                                <li><a href="#">Activities</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Policies</h4>
+                            <ul>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Cancellation Policy</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Connect With Us</h4>
+                            <div class="social-links">
+                                <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="fa-brands fa-pinterest"></i></a>
+                            </div>
+                            <div class="newsletter">
+                                <h4>Subscribe to Newsletter</h4>
+                                <div class="newsletter-form">
+                                    <input type="email" placeholder="Your email address">
+                                    <button class="btn-primary">Subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; <%= new Date().getFullYear() %> CrestStay. All Rights Reserved.</p>
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    
+
+    <script src="../script/script.js">
+   
+</script>
+</body>
+</html>
