@@ -30,7 +30,7 @@ router.post('/login', (req, res, next) => {
         } else {
           // Wrong role selected
           return res.status(401).render('login', {
-            title,
+            title: 'CrestStay | Login',
             message: 'Incorrect role selected. Please try again.',
             username,
             role
@@ -38,7 +38,7 @@ router.post('/login', (req, res, next) => {
         }
       } else {
         return res.status(401).render('login', {
-          title,
+          title: 'CrestStay | Login',
           message: 'Invalid password. Please try again.',
           username,
           role
@@ -46,7 +46,7 @@ router.post('/login', (req, res, next) => {
       }
     } else {
       return res.status(401).render('login', {
-        title,
+        title: 'CrestStay | Login',
         message: 'Invalid credentials. Please try again.',
         username,
         role
@@ -72,7 +72,7 @@ router.post('/register', (req, res, next) => {
     // Check if the username already exists
     if (users.some(u => u.username === username)) {
       return res.status(400).render('register', { 
-        title: 'CrestStay | Create Account', 
+        title: 'CrestStay | Register', 
         roles: ['user', 'admin'], // or fetch dynamically from the database
         selectedRole: role,
         message: 'Username already exists. Please choose another one.'
