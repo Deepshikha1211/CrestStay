@@ -10,38 +10,57 @@
     <link rel="stylesheet" href="../style/home.css">
   </head>
   <body>
-    <nav>
-      <div class="nav__bar">
-        <div class="nav__header">
-          <div class="logo nav__logo">
-            <div>H</div>
-            <span>HOTEL<br />CrestStay</span>
+      <div class="container">
+      <nav class="navbar">
+        <div class="logo nav__logo">
+          <div class="logo-icon">
+            <!-- <i class="fas fa-gem"></i> -->
+             <div>C</div>
           </div>
-          <div class="nav__menu__btn" id="menu-btn">
-            <i class="ri-menu-line"></i>
+          <div class="logo-text">
+            <h2>CrestStay</h2>
+            <!-- <p>Luxury Retreats</p> -->
           </div>
         </div>
-        <ul class="nav__links" id="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#room">Room</a></li>
-          <li><a href="#feature">Feature</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#news">News</a></li>
+        
+        <div class="nav-menu">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#room" class="nav-link">Suites</a></li>
+            <li class="nav-item"><a href="#menu" class="nav-link">Dining</a></li>
+            <li class="nav-item"><a href="#feature" class="nav-link">Experiences</a></li>
+            <li class="nav-item"><a href="#footer" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="login-btn" id="loginButton">Reserve Now</button>
+        </div>
+        
+        <div class="hamburger">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-slider">
+      <!-- Slide 1 -->
+      <div class="slide active">
+        <!-- <img src="/api/placeholder/1920/1080" alt="Luxury hotel exterior" class="slide-bg"> -->
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <p class="slide-subtitle"><span>Redefining Luxury</span></p>
+          <h1 class="slide-title"><span>Where Every Moment Becomes a Memory</span></h1>
+          <p class="slide-description"><span>Discover an unprecedented level of sophistication and comfort in our meticulously designed sanctuary, where extraordinary experiences await at every turn.</span></p>
+          <a href="#room" class="cta-btn">Explore Our Suites</a>
+        </div>
+      </div>
+    </div>
+    
   
-          <button class="loginBtn" id="loginButton">Login</button>
-        </ul>
-      </div>
-    </nav>
-
-    <header class="header" id="home">
-      <div class="section__container header__container">
-        <p class="section__subheader">DISCOVER YOUR ESCAPE</p>
-        <h1>Your Perfect Stay Begins Here</h1> 
-        <button class="btn" onclick="window.location.href='/api/login'">Start Your Journey</button>
-
-      </div>
-    </header>
+    
+  </section>
     
     
 
@@ -351,11 +370,11 @@
 
 
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer" id="footer">
   <div class="section__container footer__container">
       <div class="footer__col">
           <div class="logo footer__logo">
-              <div>H</div>
+              <div>C</div>
               <span>HOTEL<br />CrestStay</span>
           </div>
           <p class="section__description">
@@ -414,9 +433,6 @@
 </footer>
     
     <script src="/home.js">
-     
-
     </script>
   </body>
 </html>
-

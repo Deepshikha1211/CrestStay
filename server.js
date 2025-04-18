@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const helmet = require('helmet'); 
 const cors = require('cors'); 
 const compression = require('compression'); // Middleware for response compression
-const cookieParser = require('cookie-parser'); // Middleware for parsing cookies
+
 const rateLimit = require('express-rate-limit'); // Middleware for rate limiting
 
 const app = express();
@@ -41,7 +41,7 @@ app.use(
 );
 app.use(morgan('dev'));
 app.use(compression());
-app.use(cookieParser());
+
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
