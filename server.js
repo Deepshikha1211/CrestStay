@@ -10,6 +10,11 @@ const rateLimit = require('express-rate-limit'); // Middleware for rate limiting
 const app = express();
 const PORT = 8080;
 
+
+const connectDB = require('./config/db');
+connectDB(); // Connect to MongoDB
+
+
 // Import middlewares
 const errorHandler = require('./middlewares/errorHandler'); 
 
@@ -63,30 +68,22 @@ const apiRoutes = require('./api/apiRoutes');
 app.use('/api', apiRoutes); 
 
 // Serve HTML files
-app.get('/', (req, res) => {
-  const rooms = [
-    {
-      name: "Deluxe Suite",
-      description: "Well-appointed rooms designed for guests who desire more.",
-      price: "$399",
-      image: "room-1.jpg"
-    },
-    {
-      name: "Family Suite",
-      description: "Consists of multiple rooms and a common living area.",
-      price: "$599",
-      image: "room-2.jpg"
-    },
-    {
-      name: "Luxury Penthouse",
-      description: "Top-tier accommodations usually on the highest floors of a hotel.",
-      price: "$799",
-      image: "room-3.jpg"
-    }
-  ];
-  
-  res.render('home', { title: 'CrestStay', rooms: rooms });
+const Room = require('./models/Room'); 
+const MenuItem = require('./models/MenuItem');
+const News = require('./models/News');
+app.get('/', async (req, res) => {
+  try {
+    const rooms = await Room.find();
+    const menuItems = await MenuItem.find();
+    const newsItems = await News.find();
+    res.render('home', { title: 'CrestStay', rooms, menuItems, newsItems });
+  } catch (error) {
+    res.status(500).send('Error fetching data');
+  }
 });
+
+
+
 
 app.get('/api/adminDashboard', (req, res) => {
   res.status(200).render('adminDashboard', { title: 'CrestStay | Admin Dashboard'});
