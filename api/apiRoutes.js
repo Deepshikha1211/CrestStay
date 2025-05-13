@@ -1,50 +1,15 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
 const router = express.Router();
-
-const usersFilePath = path.join(__dirname, '../models/users.json');
+const User = require('../models/User');
 
 // Login route (Handles both user and admin authentication)
-router.post('/login', (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   const { username, password, role } = req.body;
 
-  fs.readFile(usersFilePath, 'utf-8', (err, data) => {
-    if (err) return next(err);
+  try {
+    const user = await User.findOne({ username });
 
-    let users = [];
-    if (data) {
-      users = JSON.parse(data);
-    }
-
-    const user = users.find(u => u.username === username);
-
-    if (user) {
-      if (user.password === password) {
-        if (user.role === role) {
-          if (role === 'admin') {
-            return res.status(302).redirect('/api/adminDashboard');
-          } else {
-            return res.status(302).redirect('/api/userDashboard');
-          }
-        } else {
-          // Wrong role selected
-          return res.status(401).render('login', {
-            title: 'CrestStay | Login',
-            message: 'Incorrect role selected. Please try again.',
-            username,
-            role
-          });
-        }
-      } else {
-        return res.status(401).render('login', {
-          title: 'CrestStay | Login',
-          message: 'Invalid password. Please try again.',
-          username,
-          role
-        });
-      }
-    } else {
+    if (!user) {
       return res.status(401).render('login', {
         title: 'CrestStay | Login',
         message: 'Invalid credentials. Please try again.',
@@ -52,45 +17,67 @@ router.post('/login', (req, res, next) => {
         role
       });
     }
-  });
+
+    if (user.password !== password) {
+      return res.status(401).render('login', {
+        title: 'CrestStay | Login',
+        message: 'Invalid password. Please try again.',
+        username,
+        role
+      });
+    }
+
+    if (user.role !== role) {
+      return res.status(401).render('login', {
+        title: 'CrestStay | Login',
+        message: 'Incorrect role selected. Please try again.',
+        username,
+        role
+      });
+    }
+
+    // Successful login
+    if (role === 'admin') {
+      return res.redirect('/api/adminDashboard');
+    } else {
+      return res.redirect('/api/userDashboard');
+    }
+
+  } catch (err) {
+    return next(err);
+  }
 });
 
 
-// Register route (Prevents duplicate usernames)
-router.post('/register', (req, res, next) => {
+// Register route (Prevents duplicate usernames and adds to MongoDB)
+router.post('/register', async (req, res, next) => {
   const { username, password, role } = req.body;
-  const newUser = { username, password, role };
 
-  fs.readFile(usersFilePath, 'utf-8', (err, data) => {
-    if (err) return next(err);
+  try {
+    const existingUser = await User.findOne({ username });
 
-    let users = [];
-    if (data) {
-      users = JSON.parse(data);
-    }
-
-    // Check if the username already exists
-    if (users.some(u => u.username === username)) {
-      return res.status(400).render('register', { 
-        title: 'CrestStay | Register', 
-        roles: ['user', 'admin'], // or fetch dynamically from the database
+    if (existingUser) {
+      return res.status(400).render('register', {
+        title: 'CrestStay | Register',
+        roles: ['user', 'admin'],
         selectedRole: role,
         message: 'Username already exists. Please choose another one.'
       });
     }
 
-    users.push(newUser);
-    fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), (err) => {
-      if (err) return next(err);
+    const newUser = new User({ username, password, role });
+    await newUser.save();
 
-      // Redirect based on the new user's role
-      if (newUser.role === 'admin') {
-        return res.status(302).redirect('/api/adminDashboard'); // Redirect admins
-      } else {
-        return res.status(302).redirect('/api/userDashboard'); // Redirect regular users
-      }
-    });
-  });
+    // Redirect based on the new user's role
+    if (role === 'admin') {
+      return res.redirect('/api/adminDashboard');
+    } else {
+      return res.redirect('/api/userDashboard');
+    }
+
+  } catch (err) {
+    return next(err);
+  }
 });
 
 module.exports = router;
